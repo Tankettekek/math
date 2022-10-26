@@ -1,0 +1,43 @@
+\ProvidesPackage{typeset}
+
+%Typesetting packages
+\usepackage[a4paper, total={160mm,265mm}]{geometry}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[framemethod=pstricks]{mdframed}
+
+%Fonts
+\usepackage{fontspec}
+\setmainfont{Roboto}
+
+%Math packages
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{tkz-tab}
+\usepackage{amssymb}
+
+%PGFPLOTS options
+\usepgfplotslibrary{fillbetween}
+%Compat
+\pgfplotsset{compat=1.18}
+%PGFPLOTS macro
+\pgfplotsset{holdot/.style={color=black,fill=white,only marks,mark=*}}
+\usepgfplotslibrary{external}
+\tikzexternalize[prefix=pgfplotsfigures/]
+
+
+%Typesetting of elements
+%%Subsubsections
+\titleformat{\subsubsection}[runin]
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}{0em}{0.2em}{1em}
+
+%macro pour les definitions
+\newcommand{\definition}[1]{
+        \subsubsection*{\underline{Définition\textit{#1}}}
+}
+
+%Box (defbox)
+\newmdenv[linecolor=black, linewidth=0.7pt, backgroundcolor=lightgray, innertopmargin=5pt, innerbottommargin=5pt, roundcorner=5pt]{defbox}
+

@@ -2,8 +2,9 @@
 *
 # But not directories
 !*/
-# And not tex or pdf files
+# And not tex or sty or pdf files
 !*.tex
+!*.sty
 !*.pdf
 # And not itself
 !.gitignore

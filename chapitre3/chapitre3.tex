@@ -90,12 +90,14 @@ $f$ est convexe sur $I$ si et seulement si pour tout points a et b distincts de 
 \definition{ Point d'inflexion}
 Le point $A$ de coordonées $(a;f(a))$ est un point d'inflexion de $C_f$ si et seulement si la tangente traverse la courbe au point A.
 \subsection{Convéxité et sens de variation de $f'$}
+\label{conv:deriv}
 \subsubsection*{Propriété}
 \begin{itemize}[label=\textbullet]
 	\item $f$ est convexe sur $I$ si et seulement si $f'$ est croissante sur $I$.
 	\item $f$ est concave sur $I$ si et seulement si $f'$ est décroissante sur $I$. 
 \end{itemize}
 \subsection{Convéxité et signe de $f''$}
+\label{conv:deriv_sec}
 \subsubsection*{Propriété 1}
 \begin{itemize}[label=\textbullet]
 	\item $f$ est convexe sur $I$ si et seulement si $f''$ est positive sur $I$.
@@ -158,5 +160,40 @@ Soit $f$ une fonction deux fois dérivable sur $I$. Le point $A(a;f(a))$ est un 
 \begin{enumerate}
 	\item Les trois propositions suivantes sont équivalentes. $f$ est convexe sur $I$ $\iff$ $f'$ est croissante sur $I$ $\iff$ $f''\geq 0$.
 	\item Les trois propositions suivantes sont équivalentes. $f$ est concave sur $I$ $\iff$ $f'$ est décroissante sur $I$ $\iff$ $f''\leq 0$.
-\end{enumerate}
+\end{enumerate} \newpage
+\section{Annexe}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle,axis x line=middle,ticks=none]
+                 	\addplot[ 
+	                        domain=-3:3,
+                       		samples=1000,
+        	                color=black,
+        	        ]
+			{x^3};
+        	        \addlegendentry{$f(x)=x^3$}
+			\addplot[ 
+	                        domain=-3:3,
+                       		samples=1000,
+        	                color=black,
+				densely dotted,
+				thick,
+				]
+			{3*x^2};
+        	        \addlegendentry{$f''(x)=3x^2$}
+			\addplot[ 
+	                        domain=-3:3,
+                       		samples=1000,
+        	                color=black,
+				densely dashed,
+				thick,
+				]
+			{6*x};
+        	        \addlegendentry{$f''(x)=6x$}
+        	\end{axis}
+        \end{tikzpicture}
+	\caption{Courbe d'une fonction, sa dérivée et sa derivée seconde}
+\end{figure}
+Dans cette représentation on peut clairement observer le signe de $f''(x)$, la variation de $f'$ et la convéxité de $f$. Cette figure illustre les propriétés exposées dans les subsections \ref{conv:deriv} et \ref{conv:deriv_sec}. 
 \end{document}

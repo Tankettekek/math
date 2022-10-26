@@ -1,0 +1,14 @@
+%Math packages
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{tkz-tab}
+\usepackage{amssymb}
+
+%PGFPLOTS options
+\usepgfplotslibrary{fillbetween}
+%Compat
+\pgfplotsset{compat=1.18}
+%PGFPLOTS macro
+\pgfplotsset{holdot/.style={color=black,fill=white,only marks,mark=*}}
+\usepgfplotslibrary{external}
+\tikzexternalize[prefix=pgfplotsfigures/]

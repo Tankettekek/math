@@ -1,0 +1,116 @@
+\documentclass{article}
+
+\input{typeset.tex}
+\input{math.tex}
+\input{macro.tex}
+%Language package
+\usepackage[french]{babel}
+
+\title{Chapitre 4: Successions d'épreuves indépendantes}
+\author{George Alexandru Uzunov}
+\date{}
+
+%%Paramètres graphiques pour représenter l'arbre de probabilités
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
+\tikzstyle{bag} = [text width=4em, text centered]
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+\section{Représenter une succession d'epreuves}
+
+\subsection{Rappel sur l'arbre pondeéré}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[grow=right, sloped]
+		\node[bag]{$\Omega$}
+			child{
+				node[bag]{$S$}
+					child{
+						node[bag]{$A$}
+						edge from parent
+						node[below]{$P_2$}
+					}
+					child{
+						node[bag]{$\overline{A}$}
+						edge from parent
+						node[above]{$1-P_2$}
+					}
+					edge from parent
+					node[below]{$P_1$}
+				}
+			child{
+				node[bag]{$\overline{S}$}
+					child{
+						node[bag]{$A$}
+						edge from parent
+						node[below]{$P_2$}
+					}
+					child{
+						node[bag]{$\overline{A}$}
+						edge from parent
+						node[above]{$1-P_2$}
+					}
+					edge from parent
+					node[above]{$1-P_1$}
+				};
+	\end{tikzpicture}
+	\caption{Représentation d'un arbre pondéré}
+\end{figure}
+
+\subsection{Successions d'épreuves indépendantes}
+
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Dans une succession d'épreuves, lorsque l'issue d'une épreuve ne dépend pas des épreuves précédentes, on dit qu'elle est indépendante.
+\end{defbox}
+
+\subsubsection*{Propriétés}
+Lorsqu'on répète $n$ fois de façon indépendante une éxpérience aléatoire dont les issues sont $A_1, A_2, \dots, A_n$ pour lesquelles les probabilités sont $P(A_1), P(A_2), \dots, P(A_n)$, alors la probabilité d'obtenir la suite d'issues $A_1$ jusqu'à $A_n$ est le produit de leur probabilités. 
+\subsubsection*{Exemple}
+Soit un dé à quatre faces équilibré. Si ce dé est numéroté de 1 à 4:\\\\
+\begin{centering}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		$x$ & 1 & 2 & 3 & 4 \\ \hline
+		$P(x)$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{4}$ \\ \hline
+	\end{tabular}
+\end{centering}\\\\
+De même, soient un jeton $A$ et deux jetons $B$ placés dans un sac. Si, successivement nous lançons le dé puis nous tirons un jeton, les issues sont les suivantes.
+% Arbre pondéré
+%\begin{figure}
+%	\centering
+%		\begin{tikzpicture}[grow=right, sloped]
+%		
+%		\end{tikzpicture}	
+%	\caption{Arbre pondéré des issues possibles}
+%\end{figure}
+Ceci donne la loi de probabilité suivante:\\\\
+\begin{centering}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+		\hline
+		Issues & $(1;A)$ & $(1;B)$ & $(2;A)$ & $(2;B)$ & $(3;A)$ & $(3;B)$ & $(4;A)$ & $(4;B)$ \\ \hline
+		Probabilité de chaque issue & $\frac{1}{12}$ &$\frac{1}{6}$&$\frac{1}{12}$&$\frac{1}{6}$ &  $\frac{1}{12}$&$\frac{1}{6}$ & $\frac{1}{12}$ & $\frac{1}{6}$\\ \hline
+	\end{tabular}
+\end{centering}
+
+
+\section{Loi de Bernoulli}
+
+
+\section{Loi Binomiale}
+
+\subsection{Schema de Bernoulli}
+
+\subsection{Etude d'un exemple}
+
+\subsection{Coefficients binomiaux}
+
+
+\section{Application de la loi binomiale}
+
+\end{document}

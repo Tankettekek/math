@@ -1,0 +1,317 @@
+\documentclass[9pt,twoside]{article}
+
+%Typesetting
+\usepackage[a4paper, total={160mm,265mm}]{geometry}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{float}
+%Math packages
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{tkz-tab}
+\usepackage[french]{babel}
+
+%PGFPLOTS options
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{holdot/.style={color=black,fill=white,only marks,mark=*}}
+
+%Compat
+\pgfplotsset{compat=1.18}
+
+%Graph compilation optimization
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+%Typesetting definition
+\titleformat{\subsubsection}[runin]
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+%Title setup
+\title{Chapitre 2: Limites de fonctions}
+\author{George Alexandru Uzunov}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents\newpage
+
+\section{Limite d'une fonction en l'infini}
+
+\subsection{Limite finie}
+
+\subsubsection*{\underline{Définition}}
+
+On dit que $f(x)$ admet pour limite $l \in \mathbb{R}$ lorsque $x$ tend vers $+\infty*$ quand tout intervalle ouvert contenant $l$ contient toutes les valeurs de $f(x)$ pour $x$ assez grand. On note: $\lim_{x \to +\infty}f(x) = l$.
+
+\subsubsection*{Remarque}
+
+On définit de la même façon $\lim_{x \to -\infty}f(x)=l$.
+
+\subsubsection*{Exemple}
+
+La fonction définie par $f(x)=2+\frac{1}{x}$ a pour limite 2 lorsque $x$ tend vers $+\infty$. \\ En effet, les valeurs de la fonction se resserentautour de 2 dès que $x$ est suffisamment grand. Si on prend un intervalle ouvert quelconque contenant 2, toutes les valeurs de la fonction appartiennent à cet intervalle dès que x est suffisamment grand.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle,axis x line=middle, ymin=0,ticks=none]
+			\addplot[name path=const1,domain=0:9,samples=2,color=gray,]{2.6};
+			\addplot[name path=const2,domain=0:9,samples=2,color=gray,]{1.9};
+			\addplot[ 
+			domain=0:9,
+			samples=100,
+			color=black,
+			]
+			{2+1/x};
+			\addlegendentry{$2+\frac{1}{x}$}
+						\addplot[lightgray] fill between[of = const1 and const2];
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Courbe représentative de la fonction $f$ et intervalle ouvert}
+\end{figure}
+
+\subsubsection*{\underline{Définition \textit{Interprétation graphique}}}
+
+Si $\lim_{x \to +\infty} f(x)=l$, alors on dit que la droite d'équation $y=l$ est asymptote horizontale en $+\infty$ à la courbe représentative de la fonction $f$. On définit de même l'asymptote horizontale en $-\infty$.
+
+\subsubsection*{Exemple}
+
+Dans l'exemple précédent, la droite $y=2$ est asymptote horizontale à $C_f$.
+
+\subsection{Limite Infinie}
+
+\subsubsection*{\underline{Définition}}
+
+On dit que $f(x)$ admet pour limite $+\infty$ lorsque $x$ tend vers $+\infty$ quand tout intervalle du type $]A;+\infty[$ (avec $A \in \mathbb{R}$) contient toutes les valeurs de $f(x)$ pour $x$ assez grand. On note: $$\lim_{x \to +\infty} f(x) = +\infty$$
+
+\subsubsection*{Remarque}
+
+On définit de la même façon $\lim_{x \to +\infty}f(x)=-\infty$ et $\lim_{x \to -\infty}f(x)=\pm\infty$.
+
+\subsubsection*{Exemple}
+
+La fonction définie par $f(x)=x^2$ a pour limite $+\infty$ quand $x$ tend vers $+\infty$. En effet, les valeurs de la fonction deviennent aussi grandes que l'on souhaite dès que $x$ est suffisamment grand. Si on prend un réel $B$ quelconque, l'intervalle $]B;+\infty[$ contient toutes les valeurs de la fonction dès que $x$ est suffisamment grand.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle,axis x line=middle, ymin=0, ymax=5, ticks=none]
+			\addplot[name path=const1,domain=0:9,samples=2,color=gray,]{5};
+			\addplot[name path=const2,domain=0:9,samples=2,color=gray,]{1.9};
+			\addplot[ 
+			domain=0:9,
+			samples=100,
+			color=black,
+			]
+			{x^2};
+			\addlegendentry{$x^2$}
+						\addplot[lightgray] fill between[of = const1 and const2];
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Courbe représentative de la fonction $f$ et intervalle ouvert contenant toutes les valeurs de $f$}
+\end{figure}
+
+\subsubsection*{Remarque}
+Une fonction qui tend vers $+\infty$ n'est pas nécéssairement croissante.
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis x line=middle,axis y line=middle, ymin=0,ticks=none]
+			\addplot[
+				color=black,
+				domain=0:20,
+				samples=1000,
+			]{2*x+sin(deg(x))*x};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Courbe représentative d'une fonction qui tend vers l'infini mais n'est pas croissante}
+\end{figure}
+
+Il existe des fonctions qui n'ont pas de limites infinies. C'est le cas des fonction sinusoidales.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle,axis x line=middle, axis equal image, ticks=none]
+			\addplot[
+				color=black,
+				domain=-10:10,
+				samples=1000,
+			]{cos(deg(x))};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Courbe représentative d'une fonction qui ne possède pas de limite infinie}
+\end{figure}
+\newpage
+\section{Limite d'une fonction en une valeur réelle}
+
+\subsection{Limite finie}
+
+\subsubsection*{\underline{Définition}}
+
+On dit que $f(x)$ admet pour limite $l$ ($l$ réel) lorsque $x$ tend vers $a$ signifie que tout intervalle ouvert contenant $l$ contient toutes les valeurs de $f(x)$ pour x assez voisin de $a$. On note: $\lim_{x \to a} f(x) = l$
+
+\subsubsection*{\underline{Propriété}}
+
+Si $f$ est une fonction de référence (fonction carré, inverse, polynôme, fraction rationelle, racine carrée, fonction exponentielle \dots) alors $\lim_{x \to a}f(x) = f(a)$ où $a$ est un réel de l'ensemble de définition de $f$.
+
+\subsection{Limite infinie}
+
+\subsubsection*{\underline{Définition}}
+On dit que $f(x)$ admet pour limite $+\infty$ lorsque $x$ tend vers $a$ quand tout intervalle du type $]A;+\infty[$ (avec $A \in \mathbb{R}$) contient toutes les valeurs de $f(x)$ pour $x$ assez voisin de $a$. On note $\lim_{x \to a} f(x)=+\infty$.
+
+\subsubsection*{Remarque}
+
+On définit de la même façon $\lim_{x \to a}f(x)=-\infty$
+
+\subsubsection*{\underline{Définition \textmd{\textit{Interprétation graphique}}}}
+
+Si $\lim_{x \to a}f(x)=+\infty$, alors on dit que la droite d'équation $x=a$ est asymptote verticale en $a$ à la courbe représentative de la fonction $f$. On définit de même l'asymptote verticale lorsque la limite est $-\infty$.
+
+\subsubsection*{Remarque}
+
+Certaines fonctions admettent des limites différentes en un réel $a$ selon $x>a$ ou $x<a$.
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle, axis x line=middle, ymin=-5, ymax=5,restrict y to domain=-20:20, ticks=none]
+			\addplot[
+				color=black,
+				domain=-5:5,
+				samples=1000,
+			]{1/x};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Courbe représentative d'une fonction avec des limites différentes en $0^+$ et en $0^-$}
+\end{figure}
+
+\section{Limites de fonctions de référence}
+
+\subsection{Limites en l'infini}
+
+\begin{center}
+	\begin{tabular}{|c|p{25mm}|c|c|c|c|c|}
+		\hline
+		$f(x)$ & $x^n$& $\frac{1}{x^n}$ & $\sqrt{x}$ & $\frac{1}{\sqrt{x}}$ & $e^x$ \\ \hline
+		$\lim_{x\to+\infty}f(x)$ & $+\infty$ & $0$ & $+\infty$ & $0$ & $+\infty$ \\ \hline
+		$\lim_{x\to-\infty}f(x)$ & $+\infty$ si $n$ pair \newline$-\infty$ si $n$ impair  & $0$ &non défini pour $x\in\mathbb{R}$ & idem & 0 \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Limites en $0$}
+\begin{center}
+	\begin{tabular}{|c|p{25mm}|c|}
+		\hline
+		$f(x)$ & \hfil$\frac{1}{x^n}$ & \hfil $\frac{1}{\sqrt{x}}$ \\ \hline	
+		$\lim_{x\to+\infty}f(x)$ & \hfil$+\infty$ & \hfil$+\infty$ \\ \hline
+		$\lim_{x\to-\infty}f(x)$ & $+\infty$ si $n$ pair \newline $-\infty$ si $n$ impair & Non défini pour $x\in \mathbb{R}$ \\ \hline
+	\end{tabular}
+\end{center}
+
+\section{Théorème sur les limites}
+La limite en l'infini d'une fonction polynomiale est égale à la limite en l'infini de son terme de plus haut degré (monome prépondérant).
+
+\section{Limites d'une fonction composée}
+\subsubsection*{Exemple}
+$x \xmapsto u x-3 \xmapsto v \sqrt{x-3}$  c'est à dire: $v(u(x))=v[u(x)]=v\circ u$
+\subsubsection*{Définition}
+Soit une fonction $u$ définie sur un intervalle $I$, et prenant ses valeurs dans un intervalle $J$. Soit une fonction $v$ définie sur un intervalle $K$ telle que $J\subset K$. On apelle fonction composée de $u$ par $v$ ou composée de $v$ "rond" $u$ la fonction $f$ définie sur $I$ telle que $f(x)=v(u(x))=v\circ u$.
+
+\subsubsection*{Propriété (Limite d'une fonction composée)}
+
+$a,b,c \in \mathbb{R}$ (éventuellement $\pm\infty$). Si on a $\begin{cases} \lim_{x\to a} u(x) =b\\ \lim_{X\to b} v(X)= c\end{cases}$ Alors, $\lim_{x\to a}v\circ u(x)= c$
+
+\section{Limites et comparaison}
+\subsection{Théorème de comparaison}
+Si $\begin{cases} \text{Pour } x\to a\text{, }f(x)\geq g(x)\\ \lim_{x\to a} g(x) = \pm \infty\end{cases}$ Alors $\lim_{x\to a}f(x)=\pm\infty$.
+
+\subsection{Théorème d'encadrement}
+Soit $l \in \mathbb{R}$. Si 
+\begin{enumerate} 
+	\item Pour  $x\to a$ ,  $g(x)\leq f(x) \leq h(x)$
+	\item $\begin{cases} \lim_{x\to a} g(x)=l \\ \lim_{x\to a} h(x)=l\end{cases}$
+\end{enumerate}
+Alors: $\lim_{x\to a } f(x) = l$
+\section{Synthèse}
+4 formes indéterminées:
+\begin{enumerate}
+	\item $-\infty+\infty$
+	\item $\frac{0}{0}$
+	\item $\frac{\pm\infty}{\pm\infty}$
+	\item $0\times\infty$
+\end{enumerate}
+Plusieurs formes de lever l'indétermination:
+\begin{enumerate}
+	\item Factorisation par le mônome prépondérant.
+	\item Expression conjugée.
+	\item Décomposer la fonction.
+	\item Théorème de comparaison ou encadrement.
+\end{enumerate}
+
+\section{Limites d'éxponentielles et croissances comparées}
+
+\subsubsection*{Propriétés}
+\begin{enumerate}
+	\item $\lim_{x\to+\infty}e^x=+\infty$
+	\item $\lim_{x\to-\infty}e^x=0$
+	\item $\lim_{x\to 0} \frac{e^x-1}{x}=1$
+\end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[axis y line=middle, axis x line=middle, ymin=0, ymax=5, axis equal image, ticks=none]
+			\addplot[
+				color=black,
+				domain=-5:5,
+				samples=1000,
+			]{(e^x-1)/x};
+			\addplot[holdot]coordinates{(0,1)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Cas d'une fonction non définie en 0 mais qui a une limite.}
+\end{figure}
+Le théorème des croissances comparées est constitué de quelques résultats de limites de fonctions qui seraient qualifiées de formes indéterminées par les méthodes usuelles.
+
+\subsubsection*{Démonstration de $\lim_{x\to+\infty}e^x$}
+On pose: $f(x)=e^x-x$ et $f'(x)=e^x-1$
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\tkzTabInit{$x$ /1,
+	    Signe de $f'(x)$ /1,
+	    Variation de $f$ /1}
+	    {$-\infty$,$0$,$+\infty$}
+\tkzTabLine{,-,z,+}
+\tkzTabVar{+/$+\infty$,
+	   -/$1$,
+	   +/$+\infty$}
+\end{tikzpicture}
+\caption{Tableau de signes de $f'(x)$ et tableau de variations de $f$.}
+\end{figure}
+$f$ est croissante sur $\mathbb{R}^{*}$ et \begin{align*}f(x) \geq 1 & \iff e^x-x\geq 1 \\
+	& \iff e^x\geq 1+x \text{ (Lemme)}\\ 
+& \lim_{x\to\infty}1+x=+\infty
+\end{align*}
+Par théorème de comparaison : $\lim_{x\to+\infty}e^x=+\infty$
+
+\subsubsection*{Propriété de croissance comparée\\}
+$\forall n \in \mathbb{N}$:
+\begin{enumerate}
+	\item $\lim_{x\to+\infty}\frac{e^x}{x^n}=+\infty$
+	\item $\lim_{x\to-\infty}x^ne^x=0$
+\end{enumerate}
+\subsubsection*{Démonstration}
+D'après le Lemme : $e^X\geq 1+ X$.\\
+On pose: $X=\frac{x}{n+1}$
+
+\begin{align*}
+	e^X\geq 1 + X & \iff e^{\frac{x}{n+1}} \geq 1+\frac{x}{n+1} \\
+	& \implies e^{\frac{x}{n+1}} \geq\frac{x}{n+1} 
+\end{align*}
+Comme la fonction $x^{n+1}$ est croissante sur $\mathbb{R}$: $(e^{\frac{x}{n+1}})^{n+1} \geq (\frac{x}{n+1})^{n+1} \iff e^x \geq kx^{n+1}$ avec\\ $k=(\frac{1}{n+1})^{n+1}$.
+$(x^n)$ positif, donc: $\frac{e^x}{x^n}\geq kx$, et $\lim_{x\to+\infty}kx=0$
+Par théorème de comparaison: $\lim_{x\to+\infty}\frac{e^x}{x^n}=+\infty$.
+\end{document}
+

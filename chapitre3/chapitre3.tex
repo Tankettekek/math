@@ -1,0 +1,162 @@
+\documentclass[9pt,twoside]{article}
+
+%Typesetting
+\usepackage[a4paper, total={160mm,265mm}]{geometry}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+%Math packages
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{tkz-tab}
+\usepackage[french]{babel}
+
+%PGFPLOTS options
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{holdot/.style={color=black,fill=white,only marks,mark=*}}
+
+%Compat
+\pgfplotsset{compat=1.18}
+
+%Graph compilation optimization
+%\usepgfplotslibrary{external}
+%\tikzexternalize
+
+%Typesetting definition
+\titleformat{\subsubsection}[runin]
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+
+%Definition d'un macro pour les definitions
+\newcommand{\definition}[1]{\subsubsection*{\underline{Définition\textit{#1}}}}
+
+%Title setup
+\title{Chapitre 3: Compléments sur la dérivation et convéxité}
+\author{George Alexandru Uzunov}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents\newpage
+
+
+\section{Complément sur la dérivation}
+\subsection{Etudier la dérivabilité en un point}
+\subsubsection*{Exemple}
+Soit une fonction $f$ telle que $f(x) = \begin{cases}x^2-2x-2 \text{ si } x\leq 1 \\
+\frac{x-4}{x} \text{ si } x>1 \end{cases}$
+\begin{itemize}[label=\textbullet]
+	\item \textit{Etude de la continuité en 1:} $\lim_{x \to 1^{-}}(x^2-2x-2)=-3$ et $\lim_{x\to 1^{+}}\frac{x-4}{x}=-3$ \\ Les limites sont égales, il y a continuité.
+	\item Pour $x\leq 1$, $f'(1^{-})=\lim_{h\to 0}\frac{f(1+h)-f(1)}{h}=\lim_{h\to 0}\frac{h^2}{h}=0$
+	\item Pour $x>1$, $f(1^{+})=\lim_{h\to 0}\frac{f(1+h)-f(1)}{h}=\lim_{h\to 0}\frac{4}{1+h}=4$
+\end{itemize}
+Les limites sont différentes. Donc $f$ n'est pas dérivable en 1.\\ Pour $1^{-}$, la tangente horizontale est $y=-3$. \\ Pour $1^{+}$, la tangente horizontale est $y=4x+7$.
+
+\subsection{Dérivée d'une fonction composée}
+\subsubsection*{Propriété}
+Soit une fonction $f$ telle que $x \xmapsto{} u(x) \xmapsto{} v[u(x)]$. Soit une fonction $u$ définie et dérivable en $I$, avec ses valeurs en $J$. Soit une fonction $v$ définie et dérivable en en $K$ tel que $J \subset K$, avec ses valeurs en $\mathbb{R}$. $f(x) = v\circ u(x)$ dérivable sur $I$. Sa dérivée est $f'(x) = v'\circ u \times u'$. 
+\subsection{Dérivées usuelles de fonctions composées}
+\begin{itemize}[label=\textbullet]
+	\item Soit $u$ une fonction dérivable et strictement positive, avec $D_f \neq D_{f'}$: 
+		$$f(x)=\sqrt{u(x)} \text{ et } f'(x)=\frac{u'(x)}{2\sqrt{u(x)}}$$
+	\item Soit $u$ une fonction dérivable sur I, alors la fonction $f(x) = (u(x))^n$
+		\begin{enumerate}
+			\item est dérivable sur $I$ $\forall n\in \mathbb{N}^{*}$
+			\item est dérivable sur $I$ si $u(x)\neq 0$ lorsque $n \in \mathbb{Z}^{*}$
+		\end{enumerate}
+		La dérivée de $f$ est alors $f'(x) = n \times u'(x) \times [u(x)]^{n-1}$
+	\item Soit $u$ dérivable sur $I$, alors la fonction $f(x)=exp(u(x))$, sa dérivée est $f'(x)=u'(x)\times exp(u(x))$.
+\end{itemize}
+\subsection{Rappel de l'application de la dérivation}
+La dérivée $f'$ sert à:
+\begin{itemize}[label=\textbullet]
+	\item Étudier la variation de la fonction $f$
+	\item Étudier des extrema
+		\begin{itemize}
+			\item Lorsque $f'(x)$ est nulle
+			\item Lorsqu'il y a changement de signe de la dérivée
+		\end{itemize}
+\end{itemize}
+\subsection{Dérivée seconde}
+\definition{}
+Soit $f$ une fonction dérivable sur $I$ telle que sa dérivée $f'$ soit aussi dérivable sur $I$. On apelle dérivée seconde la fonction $f''(x)=(f'(x))'$.
+
+\section{Convéxité}
+\subsection{Lecture Graphique}
+\definition{}
+$f$ est convexe sur $I$ si et seulement si pour tout points a et b distincts de $C_f$, la corde $[AB]$ est au dessus de $C_f$. Elle est concave si et seulement si la corde $[AB]$ est en dessous de $C_f$.
+\definition{ Point d'inflexion}
+Le point $A$ de coordonées $(a;f(a))$ est un point d'inflexion de $C_f$ si et seulement si la tangente traverse la courbe au point A.
+\subsection{Convéxité et sens de variation de $f'$}
+\subsubsection*{Propriété}
+\begin{itemize}[label=\textbullet]
+	\item $f$ est convexe sur $I$ si et seulement si $f'$ est croissante sur $I$.
+	\item $f$ est concave sur $I$ si et seulement si $f'$ est décroissante sur $I$. 
+\end{itemize}
+\subsection{Convéxité et signe de $f''$}
+\subsubsection*{Propriété 1}
+\begin{itemize}[label=\textbullet]
+	\item $f$ est convexe sur $I$ si et seulement si $f''$ est positive sur $I$.
+	\item $f$ est concave sur $I$ si et seulement si $f''$ est négative sur $I$.
+\end{itemize}
+\subsubsection*{Propriété 2}
+Soit $f$ une fonction deux fois dérivable sur $I$, $\forall x \in I$ on a: 
+\begin{itemize}[label=\textbullet]
+	\item si $f''(x)\geq 0$, alors $C_f$ est au dessus de ses tangentes.
+	\item si $f''(x)\leq 0$, alors $C_f$ est en dessous de ses tangentes.	
+\end{itemize} 
+\subsubsection*{Démonstration}
+On cherche à prouver que si $f''>0$ alors $C_f$ est au dessus de ses tangentes. 
+\\(Méthode de la différence)
+$$d(x) = f(x) - f'(a)(x-a)-f(a)$$
+$$d'(x) = f'(x) - f'(a)$$
+$$d''(x) = f''(x)$$
+Or par hypothèse $f''(x)\geq 0$.
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	\tkzTabInit{$x$ /1,
+			Signe de $d''(x)$ /1,
+			Variation de $d'$ /1}
+			{$-\infty$,$a$,$+\infty$}
+	\tkzTabLine{,+,t,+}
+	\tkzTabVar{-/,
+		   R/,
+		   +/}
+	\tkzTabIma{1}{3}{2}{$0$}
+	\end{tikzpicture}
+	\caption{Tableau de signes de $d''(x)$ et tableau de variations de $d'$.}
+\end{figure}
+D'après ce tableau de signes on a:
+\begin{itemize}[label=\textbullet]
+	\item $\forall x \in ]-\infty;a[$, $d'(x)<0$.
+	\item $\forall x \in [a;+\infty[$, $d'(x)\geq 0$.
+\end{itemize}
+On a donc:
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	\tkzTabInit{$x$ /1,
+			Signe de $d'(x)$ /1,
+			Variation de $d$ /1}
+			{$-\infty$,$a$,$+\infty$}
+	\tkzTabLine{,-,z,+}
+	\tkzTabVar{+/,
+		   -/$0$,
+		   +/}
+	\end{tikzpicture}
+	\caption{Tableau de signes de $d'(x)$ et tableau de variations de $d$.}
+\end{figure}
+L'extremum est 0 pour $d$. Donc $d(x)\geq 0$.
+$C_f$ est donc toujours au dessus de ses tangentes.
+\subsection{Point d'inflexion et dérivée seconde}
+\subsubsection*{Propriété}
+Soit $f$ une fonction deux fois dérivable sur $I$. Le point $A(a;f(a))$ est un point d'inflexion si et seulement si $f''$ s'annule en $a$ tout en changeant de signe.
+\subsection{Synthèse}
+\begin{enumerate}
+	\item Les trois propositions suivantes sont équivalentes. $f$ est convexe sur $I$ $\iff$ $f'$ est croissante sur $I$ $\iff$ $f''\geq 0$.
+	\item Les trois propositions suivantes sont équivalentes. $f$ est concave sur $I$ $\iff$ $f'$ est décroissante sur $I$ $\iff$ $f''\leq 0$.
+\end{enumerate}
+\end{document}

@@ -1,3 +1,7 @@
 # Cours de maths de terminale
 
-Cette repo me permet de sauvegarder mes cours de maths et leur fichiers latex. 
+Cette repo est une backup de mes cours de maths transcrits en LaTeX.
+
+Chaque dossier contient les fichiers `.tex` qui servent a gemerer les cours, et les rendus en `.pdf`.
+Je vais la mettre a jour de facon irreguliere tout au long de cette année.
+

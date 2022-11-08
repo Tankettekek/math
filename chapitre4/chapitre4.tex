@@ -7,8 +7,6 @@
 \date{}
 
 %%Paramètres graphiques pour représenter l'arbre de probabilités
-\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
-\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
 \tikzstyle{bag} = [text width=4em, text centered]
 
 \begin{document}
@@ -68,42 +66,115 @@
 \subsubsection*{Propriétés}
 Lorsqu'on répète $n$ fois de façon indépendante une éxpérience aléatoire dont les issues sont $A_1, A_2, \dots, A_n$ pour lesquelles les probabilités sont $P(A_1), P(A_2), \dots, P(A_n)$, alors la probabilité d'obtenir la suite d'issues $A_1$ jusqu'à $A_n$ est le produit de leur probabilités. 
 \subsubsection*{Exemple}
-Soit un dé à quatre faces équilibré. Si ce dé est numéroté de 1 à 4:\\\\
-\begin{centering}
+Soit un dé à quatre faces équilibré. Si ce dé est numéroté de 1 à 4:
+\begin{figure}[H]
+	\centering
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
 		$x$ & 1 & 2 & 3 & 4 \\ \hline
-		$P(x)$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{1}{4}$ \\ \hline
+		$P(x)$ & $\sfrac{1}{4}$ & $\sfrac{1}{4}$ & $\sfrac{1}{4}$ & $\sfrac{1}{4}$ \\ \hline
 	\end{tabular}
-\end{centering}\\\\
+\end{figure}
 De même, soient un jeton $A$ et deux jetons $B$ placés dans un sac. Si, successivement nous lançons le dé puis nous tirons un jeton, les issues sont les suivantes.
-% Arbre pondéré
-%\begin{figure}
-%	\centering
-%		\begin{tikzpicture}[grow=right, sloped]
-%		
-%		\end{tikzpicture}	
-%	\caption{Arbre pondéré des issues possibles}
-%\end{figure}
-Ceci donne la loi de probabilité suivante:\\\\
-\begin{centering}
+\begin{figure}[H]
+	\centering
+	\begin{forest}
+		ptree
+		[$\Omega$
+			[$1$:\sfrac{1}{4}
+				[$A$:\sfrac{1}{3}]
+				[$B$:\sfrac{2}{3}]
+			]
+			[$2$:\sfrac{1}{4}
+				[$A$:\sfrac{1}{3}]
+				[$B$:\sfrac{2}{3}]
+			]
+			[$3$:\sfrac{1}{4}
+				[$A$:\sfrac{1}{3}]
+				[$B$:\sfrac{2}{3}]
+			]
+			[$4$:\sfrac{1}{4}
+				[$A$:\sfrac{1}{3}]
+				[$B$:\sfrac{2}{3}]
+			]
+		]
+	\end{forest}
+	\caption{}
+\end{figure}
+
+Ceci donne la loi de probabilité suivante:
+\begin{figure}[H]
+	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		Issues & $(1;A)$ & $(1;B)$ & $(2;A)$ & $(2;B)$ & $(3;A)$ & $(3;B)$ & $(4;A)$ & $(4;B)$ \\ \hline
-		Probabilité de chaque issue & $\frac{1}{12}$ &$\frac{1}{6}$&$\frac{1}{12}$&$\frac{1}{6}$ &  $\frac{1}{12}$&$\frac{1}{6}$ & $\frac{1}{12}$ & $\frac{1}{6}$\\ \hline
+		Probabilité de chaque issue & $\sfrac{1}{12}$ &$\sfrac{1}{6}$&$\sfrac{1}{12}$&$\sfrac{1}{6}$ &  $\sfrac{1}{12}$&$\sfrac{1}{6}$ & $\sfrac{1}{12}$ & $\sfrac{1}{6}$\\ \hline
 	\end{tabular}
-\end{centering}
+\end{figure}
 
 
 \section{Loi de Bernoulli}
-
-
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Une épreuve de Bernoulli est une éxperience aléatoire qui admet exactement deux issues possibles (succès '$S$', échec '$E$) 
+\end{defbox}
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Soit $X$ la variable aléatoire prenant la valeur 1 si S est réalisé avec une probabilité $p$ la loi de probabilité est:
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			$k$ & 0 & 1 \\ \hline
+			$P(X=k)$ & $1-p$ & $p$ \\ \hline	
+		\end{tabular}
+		\caption{Loi de Bernoulli de paramètre $p$}
+	\end{figure}
+\end{defbox}
+\subsubsection*{Propriétés}
+$$E(X) = 0(1-p)+ 1\times p = p$$
+$$V(X) = p-p^2 = p(1-p)$$
+$$\sigma(X) = \sqrt{p(1-p)}$$
 \section{Loi Binomiale}
 
 \subsection{Schema de Bernoulli}
 
-\subsection{Etude d'un exemple}
+\begin{defbox}
+	\sloppy
+	\definition{}
+	On apelle Schema de Bernoulli d'ordre $n$ la répétition de $n$ épreuves de Bernoulli \underline{\underline{identiques et indépendantes}}.
+\end{defbox}
 
+\subsection{Etude d'un exemple}
+Soit un schéma de Bernoulli d'ordre 3.
+
+\begin{figure}[H]
+	\centering
+	\begin{forest}
+		ptree
+		[$\Omega$
+			[$S$:p
+				[$S$:p
+					[$S$:p][$\overline{S}$:1-p]
+				]
+				[$\overline{S}$:1-p
+					[$S$:p][$\overline{S}$:1-p]
+				]
+			]
+			[$\overline{S}$:1-p
+				[$S$:p
+					[$S$:p][$\overline{S}$:1-p]
+				]
+				[$\overline{S}$:1-p
+					[$S$:p][$\overline{S}$:1-p]
+				]
+			]
+		]
+	\end{forest}
+\end{figure}
+Soit $X$ la variable aléatoire modelisant le nombre ($k$) de succès. On a: $X(\Omega) = {0;1;2;3}$
 \subsection{Coefficients binomiaux}
 
 

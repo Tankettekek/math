@@ -11,14 +11,12 @@
 %Fonts
 \usepackage{fontspec}
 \setmainfont{Roboto}
-\addfontfeatures{RawFeature=+frac}
 %Math packages
 \usepackage{mathtools}
 \usepackage{pgfplots}
 \usepackage{tkz-tab}
 \usepackage{forest}
 \usepackage{amssymb}
-
 %PGFPLOTS options
 \usepgfplotslibrary{fillbetween}
 %Compat
@@ -64,9 +62,9 @@
     if={
       > O_= {n'}{1}
     }{
-      edge label={node [midway, below, font=\footnotesize] {$#1$} }
+      edge label={node [midway, below] {$#1$} }
     }{
-      edge label={node [midway, above, font=\footnotesize] {$#1$} }
+      edge label={node [midway, above] {$#1$} }
     },
   }
 }

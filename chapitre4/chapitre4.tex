@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{typeset}
+\usepackage{mathrsfs}
 \usepackage[french]{babel}
 
 \title{Chapitre 4: Successions d'épreuves indépendantes}
@@ -8,6 +9,8 @@
 
 %%Paramètres graphiques pour représenter l'arbre de probabilités
 \tikzstyle{bag} = [text width=4em, text centered]
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
 
 \begin{document}
 \maketitle
@@ -16,43 +19,22 @@
 \section{Représenter une succession d'epreuves}
 
 \subsection{Rappel sur l'arbre pondeéré}
-
 \begin{figure}[H]
 	\centering
-	\begin{tikzpicture}[grow=right, sloped]
-		\node[bag]{$\Omega$}
-			child{
-				node[bag]{$S$}
-					child{
-						node[bag]{$A$}
-						edge from parent
-						node[below]{$P_2$}
-					}
-					child{
-						node[bag]{$\overline{A}$}
-						edge from parent
-						node[above]{$1-P_2$}
-					}
-					edge from parent
-					node[below]{$P_1$}
-				}
-			child{
-				node[bag]{$\overline{S}$}
-					child{
-						node[bag]{$A$}
-						edge from parent
-						node[below]{$P_2$}
-					}
-					child{
-						node[bag]{$\overline{A}$}
-						edge from parent
-						node[above]{$1-P_2$}
-					}
-					edge from parent
-					node[above]{$1-P_1$}
-				};
-	\end{tikzpicture}
-	\caption{Représentation d'un arbre pondéré}
+	\begin{forest}
+		ptree
+		[$\Omega$
+			[$S$:P_1
+				[$A$:P_2]
+				[$\overline{A}$:1-P_2]
+			]
+			[$\overline{S}$:1-P_1
+				[$A$:P_2]
+				[$\overline{A}$:1-P_2]
+			]
+		]
+	\end{forest}
+	\caption{}
 \end{figure}
 
 \subsection{Successions d'épreuves indépendantes}
@@ -111,13 +93,13 @@ Ceci donne la loi de probabilité suivante:
 		Probabilité de chaque issue & $\sfrac{1}{12}$ &$\sfrac{1}{6}$&$\sfrac{1}{12}$&$\sfrac{1}{6}$ &  $\sfrac{1}{12}$&$\sfrac{1}{6}$ & $\sfrac{1}{12}$ & $\sfrac{1}{6}$\\ \hline
 	\end{tabular}
 \end{figure}
-
+\newpage
 
 \section{Loi de Bernoulli}
 \begin{defbox}
 	\sloppy
 	\definition{}
-	Une épreuve de Bernoulli est une éxperience aléatoire qui admet exactement deux issues possibles (succès '$S$', échec '$E$) 
+	Une épreuve de Bernoulli est une éxperience aléatoire qui admet exactement deux issues possibles (succès '$S$', échec '$E$') 
 \end{defbox}
 \begin{defbox}
 	\sloppy
@@ -174,10 +156,58 @@ Soit un schéma de Bernoulli d'ordre 3.
 		]
 	\end{forest}
 \end{figure}
-Soit $X$ la variable aléatoire modelisant le nombre ($k$) de succès. On a: $X(\Omega) = {0;1;2;3}$
+Soit $X$ la variable aléatoire modelisant le nombre ($k$) de succès. On a: $X(\Omega) = {0;1;2;3}$\newpage
 \subsection{Coefficients binomiaux}
+\begin{defbox}
+	\sloppy
+	\definition{}
+	On apelle factorielle de $n$ le nombre $n!$.
+	$$n! = \prod_{i=1}^{n} i = n \times (n-1) \times (n-2) \times \dots \times 1$$
+	Par convention $0! = 1$.
+\end{defbox}
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Soit un schéma de Bernoulli d'ordre $n$ ($n \in \mathbb{N}^{*}$), représenté par un arbre, pour $k \in \mathbb{N}$, $0 \leq k \leq n$. On note $\binom{n}{k}$ le nombre de chemins de l'arbre réalisant $k$ succès lors de $n$ répétitions. Il s'apelle coéfficient binomial de $k$ parmi $n$.\\
+	$$ \binom{n}{k} = \frac{n!}{k!\,(n-k)!} $$
+	Par convention: $\binom{0}{0} = 1$
+\end{defbox}
+\subsubsection*{Propriétés}
+\begin{itemize}
+	\item $\forall n \geq 1,\, \binom{n}{0} = \binom{n}{n} = 1$
+	\item $\forall n \geq 1,\, 0\leq k \leq n$ \quad $\binom{n}{k}=\binom{n}{n-k}$
+	\item Formule de pascal: $\binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}$
+\end{itemize}
+\subsection{Loi binomiale de parametres $n$ et $p$}
 
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Soit un schema de Bernoulli d'ordre $n$ ou la probabilite de succes est $p$. Soit $X$ la variable aleatoire qui compte le nombre de succes.
+	$$X(\Omega) = {0,1,2,\dots, n}$$
+	$$\forall k \in \mathbb{N} | 0 \leq k \leq n$$
+	$$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$$
+	On dit que $X$ suit une loi binomiale de parametre $n$ et $p$.
+	$ X \sim \mathscr{B}(n;p) $
+\end{defbox}
+\subsection{Exemple}
+Soit une urne contenant 5 boules gagnantes et 7 perdantes. Une experience consiste a tirer au hasard 4 fois de suite une boule. Cette boule est remise a chaque fois. On apelle $X$ la variable aleatoire associee au nombre de tirages gagnants.
 
+\begin{itemize}
+	\item Exeperience aleatoire
+	\item Contexte d'equiprobabilite
+\end{itemize}
+$$
+\begin{rcases}
+	p = \frac{\text{cas favorable}}{\text{cas possible}} = \frac{5}{12}\\
+	1-p = \frac{7}{12}
+\end{rcases}
+$$ Experience a deux issues.\\
+D'ou \underline{epreuve de Bernoulli}: 
+Schema de Bernoulli : 4 tirages constitues de 4 epreuves de Bernoulli \underline{identiques et independantes}.
+D'ou: $X \sim \mathscr{B}(4;\frac{5}{12})$, $P(X=k) = \binom{4}{3}\times (\frac{5}{12})^3 \times (\frac{7}{12})$
 \section{Application de la loi binomiale}
+
+Voir Poly. 
 
 \end{document}

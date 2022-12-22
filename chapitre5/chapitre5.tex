@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage{typeset}
+\usepackage[french]{babel}
+
+\title{Continuité}
+\author{George Alexandru Uzunov}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+\section{Notion de continuité}
+\begin{defbox}
+	\sloppy
+	\definition{}
+	Soit une fonction $f$ définie sur un intervalle $I$ et $a \in I$.
+	$f$ est continue en $a$ si $\lim_{x \to a} f(x) = f(a)$.
+	$$
+	\begin{cases}
+		\lim_{x \to a^{-}} f(x) = f(a) \\
+		\lim_{x \to a^{+}} f(x)  = f(a)	
+	\end{cases}
+	$$
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$x$},
+				ylabel={$y$},
+				axis lines=center,
+				xmin = -1, xmax = 3,
+				ymin = -1, ymax = 22,
+				xtick = {1.5},
+				ytick = {4.48},
+				xticklabels={$a$},
+				yticklabels={$f(a)$},
+				]
+				\addplot[domain=-1:3,
+					samples=100,
+					color=black]{e^x};
+				\node[fill,circle,inner sep=1pt] at (1.5,4.48){};
+				\draw[dashed,color=black] (0,4.48) -| (1.5,0);
+			\end{axis}
+		\end{tikzpicture}
+		\caption{$f$ est continue sur $D_f$}
+	\end{figure}
+\end{defbox}
+\subsubsection*{Exemple}
+\begin{enumerate}
+	\item La fonction valeur absolue ($f:x \mapsto |x|$): 
+		\begin{itemize}
+			\item Continue
+			\item Non derivable en 0
+		\end{itemize}
+	\item La fonction racine carree ($f:x \mapsto \sqrt{x}$)
+		\begin{itemize}
+			\item $D_f = \mathbb{R}^{*}$ \,\,\,\,\, $D_{f^{'}} = \mathbb{R}_{+}^{*}$
+			\item Continue en 0
+			\item Non derivable en 0
+		\end{itemize}
+	\item La fonction exponentielle ($f:x \mapsto e^x$)
+		\begin{itemize}
+			\item Continue
+			\item Derivable
+		\end{itemize}
+	\item La fonction partie entiere ($f:x \mapsto \lfloor x \rfloor$)
+		\begin{itemize}
+			\item Non continue
+			\item Non derivable
+		\end{itemize}
+\end{enumerate}
+\section{Continuite des fonctions usuelles}
+\begin{figure}[H]
+	\centering
+	\scalebox{1.2}{%
+		\begin{tabular}{|c|c|}
+			\hline
+			Fonction & Intervalle de continuite \\ \hline\hline
+			$x^n$ (avec $n \in \mathbb{N}$) & $\mathbb{R}$ \\ \hline
+			$\frac{1}{x^n}$ & $\mathbb{R}^{*}$ \\ \hline
+			$\sqrt{x}$ & $\mathbb{R}^{*}$ \\ \hline
+			$|x|$ & $\mathbb{R}$ \\ \hline
+			$e^x$ & $\mathbb{R}$ \\ \hline
+			$\sin(x)$ & $\mathbb{R}$ \\ \hline
+			$\cos(x)$ & $\mathbb{R}$ \\ \hline
+		\end{tabular}
+	}
+	\caption{Tableau de continuite des fonctions de reference}
+\end{figure}	
+
+
+	Toute fonction construite par somme, produit, quotient ou composition à partir des fonctions de reference herite de la continuite des fonctions de reference utilisees.\\
+
+	\subsubsection*{Exemple}
+	$$ f:x \mapsto x^2+1 \mapsto \cos (x^2+1) \mapsto e^{\cos (x^2+1)} $$
+	Par theoreme de continuite des fonctions des fonctions de reference, par somme et par composition, on peut conclure que $f$ est continue sur $\mathbb{R}$. \\ 
+	\subsubsection*{Exercice type}
+	$$f(x) = 
+	\begin{cases}
+		-x+2 \text{ pour } x < 3\\
+		x - 4 \text{ pour } 3 \leq x < 5 \\
+		-2x+13 \text{ pour } x\geq 5
+	\end{cases}
+	$$
+	La fonction est elle continue?
+	
+	$$ 	\begin{rcases*}
+			\lim_{x \to 3^{-}} -x+2 = -1	\\
+			\lim_{x \to 3^{+}} x-4 = -1 \\
+		\end{rcases*} \text{ continue en 3}
+	$$
+	$$
+		\begin{rcases*}
+			\lim_{x \to 5^{-}} x-4  = 1 \\
+			\lim_{x \to 5^{+}} -2x+13 = 3
+		\end{rcases*} \text{ pas continue en 5}
+	$$
+\section{Continuite et derivabilite}
+\begin{defbox}
+	\sloppy
+	\subsubsection*{\underline{Theoreme \textit{(admis)}}}
+	\begin{itemize}
+		\item Si $f$ est derivable en $a$ alors la fonction $f$ est continue en $a$.
+		\item Si $f$ est derivable sur $I$, alors elle est continue sur cet intervalle.
+	\end{itemize}
+\end{defbox}
+\section{Continuite et equations}
+\begin{defbox}
+	\sloppy
+	\subsubsection*{\underline{Theoreme \textit{(admis)}}}
+	Soit une fonction continue sur un intervalle $I = [a;b]$, pour tout $k$ tel que\\ $f(a) \leq k \leq f(b)$, l'equation $f(x) = k$ admet au moins une solution dans $I$.
+	\\
+	\subsubsection*{Remarque}
+	Le theoreme permet de prouver qu'il existe au moins une solution.
+	\\
+	\subsubsection*{\underline{Corrolaire du theoreme}}
+	Soit une fonction $f$ continue et strictement monotone sur $I$. Soit $f(a)\leq k \leq f(b)$, l'equation $f(x) = k$ admet une unique solution en $I$.
+\end{defbox}
+\subsubsection*{Exemple}
+$$f: \begin{cases}
+	\mathbb{R} \to \mathbb{R}\\
+	x \mapsto x^3-3x^2 -1
+\end{cases}$$
+Quel est le nombre de solutions a l'equation $f(x)=4$ sur $\mathbb{R}$?
+$$f'(x)=3x^2-6x$$
+On cherche les racines de la derivee.
+$$3x^2-6x=0$$
+$$\Delta = 36$$
+D'où: $x_1 = 2$ et $x_2 = 0$.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	\tkzTabInit{$x$ /1,
+			Signe de $f'(x)$ /1,
+			Variation de $f$ /1}
+			{$-\infty$,$0$,$2$,$+\infty$}
+	\tkzTabLine{,+,z,-,z,+}
+	\tkzTabVar{-/,
+print(recherche("AGTC", "GTACAAATCTTGCC")) 
+		   +/$-1$,
+		   -/$-5$,
+	   	   +/}
+	\end{tikzpicture}
+	\caption{Tableau de signes de $f'(x)$ et tableau de variations de $f$.}
+\end{figure}
+Sur $]-\infty;0]$ 0 solutions\\
+\indent Sur $[0;2]$ 0 solutions\\
+\indent Sur $[2;+\infty]$ 1 solution.
+
+\section{Continuite et suites}
+\begin{defbox}
+	\sloppy
+	\subsubsection*{\underline{Theoreme (du point fixe)}}
+	Soit une suite $(U_n)$ definie par la relation $U_{n+1} = f(U_n)$ convergente vers $l$. Si la fonction associee $f$ est continue sur $\mathbb{R}$, alors la limite de la suite en $N$ est solution de l'equation $f(x)=x$.\\
+	\indent Sachant que :
+	\begin{itemize}
+		\item $\forall n \in \mathbb{N}$,\,\, $U_n \in I$ fermé
+		\item $f$ continue en $l$,  $l\in I$ ou $f$ a valeur dans $I$ ou $I$ contient tous les termes de $(U_n)$ ou $f(I) \subset I$ ou sachant que $x\in I$, \,\, $f(x) \in I$.
+	\end{itemize}
+\end{defbox}
+\subsubsection*{Exemple}
+Soit 
+$$ (U_n) = \begin{cases}
+	U_0 = 1 \\
+	U_{n+1} = \frac{3}{U_n+1}
+\end{cases}
+$$
+Determinez la limite de $(U_n)$.
+
+\paragraph{1.} Posons $U_{n+1} = f(U_n)$ où $f(x) = \frac{3}{x+1}$ sur $I=[0;3]$. On admet que$(U_n)$ converge et que ses valeurs sont contenues dans l'intervalle $[0;3]$
+\paragraph{2. Continuité} $f$ est continue sur $I$ car elle est la fonction inverse d'une fonction continue ne s'annulant pas sur $I$.
+\paragraph{3.} Verifions que toutes les images de $x$ par $f$ appartiennent à $I$.
+
+\begin{equation*}
+\begin{split}
+	0 \leq x \leq 3 \\
+	\iff 1 \leq x+1 \leq 4 \\
+	\iff 1 \geq \frac{1}{x+1} \geq \frac{1}{4} \\
+	\iff 3 \geq \frac{3}{x+1} \geq \frac{3}{4} \\
+\end{split}
+\end{equation*}
+\paragraph{4.} $(U_n)$ converge vers $l$, $f$ est continue et à valeur dans $I$ donc d'après le theoreme du point fixe on a $f(x)=x$.
+
+\begin{equation*}
+\begin{split}
+	f(x)=x \iff  \frac{3}{x+1} = x \iff x^2+x-3 = 0	\,\,\,\, \Delta = 13\\
+	x_1 = \frac{1 - \sqrt{13}}{2} \,\,\,\, \text{et} \,\,\,\, x_2 = \frac{-1- \sqrt{13}}{2} \,\,\, \text{or} \,\,\, x_2 \notin I \,\,\, \text{donc} \,\,\, \lim_{n \to + \infty} (U_n) = \frac{-1+\sqrt{13}}{2} 
+\end{split}
+\end{equation*}
+
+
+\end{document}
